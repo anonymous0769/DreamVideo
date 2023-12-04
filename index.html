@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Reuse and Diffuse: Iterative Denoising for Text-to-Video Generation">
+  <meta name="keywords" content="Stable-Diffusion, Video-Generation, Text2Video">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DreamVideo: High-Fidelity Image-to-Video Generation with Image Retention and Text Guidance</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="icon" href="./static/images/favicon.ico"> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">DreamVideo: High-Fidelity Image-to-Video Generation with Image Retention and Text Guidance</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <!-- <div class="item item-chair-tp" style="text-align: center; width: 400px;"> -->
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster=""  id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-256/1.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-256/2.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-256/3.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-256/4.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-256/5.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-256/6_A butterfly flies among the flowers.mp4" type="video/mp4">
+          </video>
+        </div>
+
+
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-256/7_A match is burning.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-256/8_A close-up of the lake.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-256/9_Two men shake hands.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-256/10_Two unicorns have lunch.mp4" type="video/mp4">
+          </video>
+        </div>
+
+
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-256/11_A gorilla lifting a barbell.mp4" type="video/mp4">
+          </video>
+        </div>
+
+
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-256/12_The candles beside the skull burn.mp4" type="video/mp4">
+          </video>
+        </div>
+
+
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-256/13_The waves crashed against the lighthouse.mp4" type="video/mp4">
+          </video>
+        </div>
+
+      </div>
+      <div style="font-size:10px">All images used for video generation are from Midjourney.</div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Image-to-video generation, which aims to generate a video starting from a given reference image, has drawn great attention. Existing methods try to extend pre-trained text-guided image diffusion models to image-guided video generation models. Nevertheless, these methods often result in either low fidelity or flickering over time due to their limitation to shallow image guidance and poor temporal consistency. To tackle these problems, we propose a high-fidelity image-to-video generation method by devising a frame retention branch on the basis of a pre-trained video diffusion model, named \textbf{DreamVideo}. Instead of integrating the reference image into the diffusion process in a semantic level, our DreamVideo perceives the reference image via convolution layers and concatenate the features with the noisy latents as model input. By this means, the details of the reference image can be preserved to the greatest extent. In addition, by incorporating double-condition classifier-free guidance, a single image can be directed to videos of different actions by providing varying prompt texts. This has significant implications for controllable video generation and holds broad application prospects. We conduct comprehensive experiments on the public dataset, both quantitative and qualitative results indicate that our method outperforms the state-of-the-art method. Especially for fidelity, our model has powerful image retention ability and result in high FVD in UCF101 compared to other image-to-video models. Also, precise control can be achieved by giving different text prompts.  Further details and comprehensive results of our model will be presented <a href="https://sense39.github.io/DreamVideo/">here</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Model Architecture</h2>
+    <figure>
+      <img src="./static/images/model.png" alt="Architecture of our model." width=760px>
+      <figcaption>The architecture of DreamVideo.</figcaption>
+    </figure>
+    <p>
+      The architecture of our DreamVideo model consists of two main components: the primary U-Net block and the Image Retention block. Modules marked with flame symbols indicate that they are trainable.
+      A reference image is processed by a convolution block and concatenated with the representation of noisy latents. 
+      The Image Retention Module, as a side branch copying from the downsample blocks of U-Net, 
+      plays a role for maintaining the visual details from the input image and meanwhile also accepting text prompts for motion control.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Classifier-free Guidance for Two Conditionings</h2>
+    <figure>
+      <img src="./static/images/class-free.png" alt="These are the first frames of video generated using different image guidance scales (GS) for classifier-free guidance." width=600px>
+      <figcaption>These are the first frames of video generated using different image guidance scales (GS) for classifier-free guidance.</figcaption>
+    </figure>
+    <p>
+      It can be observed that an increase in GS substantially intensifies the brightness and contrast of the videos generated. This indicates a trend within the generated results, progressively shifting towards the image domain.
+    </p>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Quantitative Evaluation</h2>
+    <figure>
+      <img src="./static/images/results.png" alt="Pipeline of our method." width=1200px>
+      <figcaption>Quantitative evaluation on UCF-101 and MSR-VTT.</figcaption>
+    </figure>
+    <p>
+      Our model consistently presents the lowest Fréchet Video Distance (FVD) scores on both datasets. This proves that our model can generate video with better continuity.
+      Regarding the Inception Score (IS), our model's IS score is higher than that of other methods, which means that the videos generated by DreamVideo has the best quality.
+      As for the FFF<sub>CLIP</sub> metric, this is derived by employing clips to calculate the similarity between the initial frames of the generated and original videos. However, we believe that this metric may not fully represent the quality of the generated initial frame. The visual features encoded in the clip images are coarse and focus more on the presence of objects in the image rather than the quality of the initial frame. FFF<sub>SSIM</sub> demonstrate that our model's ability to generate video with high image retention.
+    </p>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Qualitative evaluation</h2>
+      <div class="container">
+        <div id="results-carousel" class="carousel results-carousel">
+          <div class="item item-chair-tp" style="text-align: center;">
+            <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+              <source src="./static/videos/com/0.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-chair-tp" style="text-align: center;">
+            <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+              <source src="./static/videos/com/2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-chair-tp" style="text-align: center;">
+            <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+              <source src="./static/videos/com/3.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-chair-tp" style="text-align: center;">
+            <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+              <source src="./static/videos/com/4.mp4" type="video/mp4">
+            </video>
+          </div>  
+        </div>
+      </div>
+    <p>
+      The comparison of videos generated by I2VGen-XL, VideoCraft1, and DreamVideo. The videos produced utilizing our method closely resemble the source images, while the videos produced by I2VGen-XL and VideoCraft1 are significantly weaker in color, position and object retention than our method.
+    </p>
+
+  </div>
+</section>
+
+
+
+<!-- 256 multi condition -->
+<section class="section">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Multi-Combinations of video generation</h2>
+      <div class="item item-chair-tp" style="text-align: center;">
+        <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+          <source src="./static/videos/multi-conditional-256/1.mp4" type="video/mp4">
+        </video>
+      </div>
+    </p>
+    Conditions for generating videos with DreamVideo: on the far left is text-only input, in the middle is both text and image input, and on the far right is image-only input.
+    </p>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Varied textual inputs -->
+<section class="section">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Varied textual inputs inference</h2>
+      <div class="container">
+        <div id="results-carousel" class="carousel results-carousel">
+          <div class="item item-chair-tp" style="text-align: center;">
+            <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+              <source src="./static/videos/i2v-varied-256/1.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-chair-tp" style="text-align: center;">
+            <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+              <source src="./static/videos/i2v-varied-256/2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-chair-tp" style="text-align: center;">
+            <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+              <source src="./static/videos/i2v-varied-256/3.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </p>
+    The videos generated under varied textual inputs.
+    </p>
+    </div>
+</section>
+
+
+<!-- Two-Stage inference -->
+<section class="section">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Two-Stage inference</h2>
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-twostage-256/1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-twostage-256/3.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-twostage-256/2.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+    </p>
+      The videos generated in two-stage inference.
+    </p>
+  </div>
+</section>
+
+
+<!-- 512 inference -->
+<section class="section">
+  <div class="container is-max-desktop content">
+    <h2 class="title">More video at high resolution</h2>
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-512/1.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-512/2.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-512/4.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-512/3.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-512/5.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-512/6.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-512/7.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="item item-chair-tp" style="text-align: center;">
+          <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+            <source src="./static/videos/i2v-512/8.mp4" type="video/mp4">
+          </video>
+        </div>
+
+
+      </div>
+    </div>
+  </p>
+  The videos generated under text and initial image at 512 &times; 512 resolution. Upon further exploration, we find that without the need for additional training, a direct modification of the original model's settings to a resolution of 512 facilitates the production of videos at 512 &times; 512 resolution.
+  </p>
+  </div>
+</section>
+
+
+<!-- 512 varied -->
+<section class="section">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Varied textual inputs inference at high resolution</h2>
+      <div class="item item-chair-tp" style="text-align: center;">
+        <video poster="" id="chair-tp" autoplay loop muted playsinline height="100%" width=1024>
+          <source src="./static/videos/i2v-varied-512/1.mp4" type="video/mp4">
+        </video>
+      </div>
+    </p>
+    The videos generated under varied textual inputs at 512 &times; 512 resolution.
+    </p>
+    </div>
+  </div>
+</section>
+
+</body>
+
+
+<script>
+  var videos = document.getElementsByClassName("clickplay");
+  for (var i = 0; i < videos.length; i++) {
+    videos[i].addEventListener("click", function() {
+      this.play();
+    });
+    videos[i].addEventListener("ended", function() {
+      this.pause();
+      this.currentTime = 0;
+    });
+  }
+</script>
+  
+
+</html>
