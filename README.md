@@ -1,3 +1,5 @@
-# Reuse and Diffuse: Iterative Denoising for Text-to-Video Generation
+# DreamVideo: High-Fidelity Image-to-Video Generation with Image Retention and Text Guidance
 
-[Website](https://anonymous0x233.github.io/ReuseAndDiffuse) • [Paper](https://arxiv.org/abs/2309.03549) • [Code](https://github.com/anonymous0x233/ReuseAndDiffuse)
+[Website](https://anonymous0769.github.io/DreamVideo/) • [Paper](#) • [Code](https://github.com/anonymous0769/DreamVideo)
+
+The source code and model will be coming soon.
